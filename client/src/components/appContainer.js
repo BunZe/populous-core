@@ -16,7 +16,16 @@ export default class appContainer extends Component {
 
         const elements = [];
         this.state.devices.forEach(device => {
-            elements.push(<DeviceInfo label={device.label} lastUpdated={"5 minutes ago"}/>)
+            let numProbed = 0;
+            let lastUpdated = null
+            this.state.data.forEach(element => {
+                if(element._id === device.deviceID){
+                    numProbed = element.value;
+                    lastUpdated = element.timestamp;
+                }
+            });
+
+            elements.push(<DeviceInfo key={device.deviceID} label={device.label} numProbed={numProbed} lastUpdated={lastUpdated}/>)
         });
     
         return (
@@ -29,6 +38,7 @@ export default class appContainer extends Component {
     componentDidMount() {
         let comp = this
 
+        console.log("hey");
         fetch("api/devices")
         .then((response) => {
             if(response.status !== 200){
@@ -42,7 +52,7 @@ export default class appContainer extends Component {
         });
 
 
-        fetch("api/data")
+        fetch("api/data/last")
         .then(
           function (response) {
             if(response.status !== 200){

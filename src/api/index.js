@@ -3,9 +3,12 @@ import { Router } from 'express';
 import tokens from './tokens.json'
 import Data from './data'
 import Devices from "./devices";
+import LastData from './lastData'
 
 export default ({ config, db }) => {
 	let api = Router();
+
+	api.use('/data/last', LastData);
 
 	api.use('/data', (req, res, next) => {
 		if (tokens.includes(req.header("API_TOKEN"))) {
