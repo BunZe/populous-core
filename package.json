@@ -36,7 +36,7 @@
     "cors": "^2.7.1",
     "eslint": "^5.16.0",
     "express": "^4.13.3",
-    "mongoose": "^5.5.7",
+    "mongoose": "^5.7.5",
     "morgan": "^1.8.0",
     "resource-router-middleware": "^0.6.0",
     "restful-mongoose": "^1.0.1"
